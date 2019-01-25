@@ -11,8 +11,11 @@ module.exports = app => {
   router.post('/login', controller.member.login);
 
   router.get('/', auth, controller.hook.homeRender);
-  router.get('/hook', controller.hook.homeRender);
+  router.get('/hook', auth, controller.hook.homeRender);
   router.get('/hook/create', auth, controller.hook.createRender);
   router.post('/hook/del', auth, controller.hook.del);
   router.post('/hook/create', auth, controller.hook.create);
+  router.get('/log', auth, controller.log.homeRender);
+  router.get('/logout', controller.member.logout);
+
 };

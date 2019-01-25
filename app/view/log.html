@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/public/unpkg.com/element-ui@2.4.11/lib/theme-chalk/index.css">
+  <title>@onface/webhook</title>
+</head>
+<body>
+<% include /common/nav.html %>
+<div id="app">
+  <el-alert
+   title="log"
+   style="margin-bottom:1em;"
+   type="success"
+   :closable="false">
+ </el-alert>
+  <el-table
+     :data="items"
+     style="width: 100%">
+     <el-table-column
+       prop="id"
+       label="ID">
+     </el-table-column>
+     <el-table-column
+       prop="hook_id"
+       label="hook_id">
+     </el-table-column>
+     <el-table-column
+       prop="request"
+       label="request">
+       <template slot-scope="scope">
+         <pre style="max-height:10em;overflow:auto;" ><code v-html="json(scope.row.request)" ></code></pre>
+       </template>
+     </el-table-column>
+     <el-table-column
+       prop="response"
+       label="response">
+       <template slot-scope="scope">
+         <pre><code v-html="json(scope.row.response)"></code></pre>
+       </template>
+     </el-table-column>
+     <el-table-column
+       prop="run_log"
+       label="run_log">
+       <template slot-scope="scope">
+         <pre><code v-html="json(scope.row.run_log)" ></code></pre>
+       </template>
+     </el-table-column>
+   </el-table>
+</div>
+<script src="/public/unpkg.com/jquery@1.12.0/dist/jquery.min.js"></script>
+<script src="/public/unpkg.com/vue@2.5.22/dist/vue.js"></script>
+<script src="/public/unpkg.com/element-ui@2.4.11/lib/index.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  computed: {
+  },
+  methods: {
+    json: function (data) {
+      return JSON.stringify(JSON.parse(data), null ,4)
+    }
+  },
+  data: function () {
+    return {
+      items: <%- JSON.stringify(items) %>
+    }
+  }
+})
+</script>
+<% include /common/bottom-file.html %>
+</body>
+</html>

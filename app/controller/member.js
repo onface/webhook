@@ -7,6 +7,9 @@ class HomeController extends Controller {
     const { ctx } = this
     await ctx.render('login.html', {});
   }
+  async logout() {
+    this.ctx.redirect('/login')
+  }
   async login() {
     const { ctx, service, app } = this
     const user = await app.mysql.get('user', {name: ctx.request.body.name})
