@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/public/unpkg.com/element-ui@2.4.11/lib/theme-chalk/index.css">
+  <title>@onface/webhook</title>
+</head>
+<body>
+<div id="app">
+  <el-alert
+   title="webhooks"
+   style="margin-bottom:1em;"
+   type="success"
+   :closable="false">
+ </el-alert>
+  <el-button type="primary" @click="gotoCreateHook" >新建 webhook</el-button>
+  <el-table
+     :data="items"
+     style="width: 100%">
+     <el-table-column
+       prop="id"
+       label="ID">
+       <template slot-scope="scope">
+         <code>
+          {{origin}}/trigger/{{scope.row.platform}}/{{scope.row.id}}
+         </code>
+       </template>
+     </el-table-column>
+     <el-table-column
+       prop="name"
+       label="name">
+     </el-table-column>
+     <el-table-column
+       prop="repository_url"
+       label="url">
+     </el-table-column>
+     <el-table-column
+       prop="platform"
+       label="platform">
+     </el-table-column>
+     <el-table-column
+       prop="branch"
+       label="branch">
+       <template slot-scope="scope">
+         <el-tag type="success">{{scope.row.branch}}</el-tag>
+       </template>
+     </el-table-column>
+     <el-table-column
+       prop="event"
+       label="event">
+       <template slot-scope="scope">
+         <el-tag type="info">{{scope.row.event}}</el-tag>
+       </template>
+     </el-table-column>
+     <el-table-column
+       prop="run"
+       width="400"
+       label="run">
+       <template slot-scope="scope">
+         <el-input type="textarea" style="font-size:12px;" autosize :value="scope.row.run"></el-input>
+       </template>
+     </el-table-column>
+     <el-table-column
+       prop="token"
+       label="token">
+     </el-table-column>
+     <el-table-column
+       prop="action"
+       label="action">
+       <template slot-scope="scope">
+         <el-button type="danger" @click="removeHook(scope.row.id)" >删除</el-button>
+       </template>
+     </el-table-column>
+   </el-table>
+</div>
+<script src="/public/unpkg.com/jquery@1.12.0/dist/jquery.min.js"></script>
+<script src="/public/unpkg.com/vue@2.5.22/dist/vue.js"></script>
+<script src="/public/unpkg.com/element-ui@2.4.11/lib/index.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  computed: {
+    origin: function () {
+      return location.origin
+    }
+  },
+  methods: {
+    gotoCreateHook: function () {
+      location.href = '/hook/create'
+    },
+    removeHook: function (id) {
+      var self = this
+      self.$confirm('确认删除？').then(function () {
+        $.ajax({
+          type: 'post',
+          url: '/hook/del',
+          dataType: 'json',
+          data: {id: id}
+        }).done(function (res) {
+          if(res.type === 'pass') {
+            self.items = self.items.filter(function (item) {
+              return item.id !== id
+            })
+          }
+          else {
+            alert(res.msg)
+          }
+        }).fail(function () {
+          alert('网络错误')
+        }).always(function () {
+          self.loading = false
+        })
+      })
+    }
+  },
+  data: function () {
+    return {
+      items: <%- JSON.stringify(items) %>
+    }
+  }
+})
+</script>
+</body>
+</html>

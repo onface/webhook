@@ -1,0 +1,12 @@
+[
+  {
+    "id": "d07021a9-e010-4a4c-ba43-ec80c41c9956",
+    "name": "bufmail 测试机同步代码",
+    "platform": "gitlab",
+    "repository_url": "git@gitlab.emailcar.net:rare/bufmail.git",
+    "branch": "master",
+    "event": "push",
+    "token": "nimopass",
+    "run": "cd /Users/rain2/Documents/onface/webhook/workspace && git checkout <%= before %>"
+  }
+]

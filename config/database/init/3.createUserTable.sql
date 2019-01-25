@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` CHAR(36)  NOT NULL,
+  `name` CHAR(36) NOT NULL,
+  `password` CHAR(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
