@@ -2,11 +2,42 @@
 
 gitlab webhook
 
-## QuickStart
+### Environment depends on
 
-<!-- add docs here for user -->
+```bash
+node@8.9.0
+yarn@1.13.0
+mysql@5.7
+```
 
-see [egg docs][egg] for more detail.
+### config
+
+Create File: `/config/deploy.json`
+```json
+{
+  "port": 3212,
+  "setupPassword": "90b50271-ce0d-414d-8847-bfd14d86a665",
+  "mysql": {
+    "host": "",
+    "port": "",
+    "user": "",
+    "password": "",
+    "database": "webhook"
+  }
+}
+```
+
+Please create a new `setupPassword`。 [https://www.uuidgenerator.net/](https://www.uuidgenerator.net/)
+
+### Deploy
+
+```bash
+$ git clone https://github.com/onface/webhook.git
+$ yarn
+$ npm start
+$ npm stop
+```
+
 
 ### Development
 
@@ -15,14 +46,6 @@ $ npm i
 $ npm run dev
 $ open http://localhost:7001/
 ```
-
-### Deploy
-
-```bash
-$ npm start
-$ npm stop
-```
-
 ### npm scripts
 
 - Use `npm run lint` to check code style.
