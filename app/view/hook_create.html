@@ -8,6 +8,7 @@
   <title>@onface/webhook</title>
 </head>
 <body>
+<% include /common/nav.html %>
 <div id="app">
   <el-alert
    title="创建 hook"
@@ -81,11 +82,12 @@ new Vue({
           "branch": "master",
           "event": "push",
           "token": "",
-          "run": "cd /Users/rain2/Documents/onface/webhook/workspace && git checkout <%%= before %%>"
+          "run": "cd somedir\r\ngit checkout <%%= before %%>"
       }
     }
   }
 })
 </script>
+<% include /common/bottom-file.html %>
 </body>
 </html>
