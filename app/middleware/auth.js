@@ -12,7 +12,12 @@ module.exports = options => {
     else {
       let userInfo = await ctx.app.mysql.get('user', {id: ctx.session.user})
       if (!userInfo) {
-        ctx.body = ctx.app.res('fail', "请先登录,用户id未找到")
+        if (ctx.isAjax) {
+          ctx.body = ctx.app.res('fail', "请先登录,用户id未找到")
+        }
+        else {
+          ctx.redirect('/login')
+        }
         return
       }
     }
