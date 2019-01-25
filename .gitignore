@@ -12,3 +12,4 @@ run/
 *.un~
 workspace
 config/config.local.js
+config/deploy.json

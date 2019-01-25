@@ -1,0 +1,12 @@
+{
+  "port": 3212,
+  "* Create setupPassword": "https://www.uuidgenerator.net/",
+  "setupPassword": "90b50271-ce0d-414d-8847-bfd14d86a665",
+  "mysql": {
+    "host": "cdb-wegwegweg.bj.tencentcdb.com",
+    "port": "10063",
+    "user": "root",
+    "password": "passwordfewgweg",
+    "database": "webhook"
+  }
+}

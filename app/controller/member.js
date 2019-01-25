@@ -9,9 +9,7 @@ class HomeController extends Controller {
   }
   async login() {
     const { ctx, service, app } = this
-    const user = await app.service.user.find({name: ctx.request.body.name})
-    if (user) {
-    }
+    const user = await app.mysql.get('user', {name: ctx.request.body.name})
     if (user) {
       if (user.password === md5(user.id + ':' + ctx.request.body.password)) {
         ctx.session.user = user.id

@@ -10,7 +10,7 @@ module.exports = options => {
       return
     }
     else {
-      let userInfo = await ctx.service.user.find({id: ctx.session.user})
+      let userInfo = await ctx.app.mysql.get('user', {id: ctx.session.user})
       if (!userInfo) {
         ctx.body = ctx.app.res('fail', "请先登录,用户id未找到")
         return
