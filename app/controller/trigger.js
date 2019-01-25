@@ -21,6 +21,9 @@ const execScript = function (script, hook, request, app) {
           let data = {
             id: uuid(),
             hook_id: hook.id,
+            // 插入hook_name 是为了减少在 log 时查询 hook_name
+            // 但是专业做 hook_name 是快照，不是最新的 hook_name
+            hook_name: hook.name,
             request: JSON.stringify(request),
             response: JSON.stringify(response),
             run_log: JSON.stringify({

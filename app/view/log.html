@@ -24,8 +24,11 @@
        label="ID">
      </el-table-column>
      <el-table-column
-       prop="hook_id"
-       label="hook_id">
+       prop="hook"
+       label="hook">
+       <template slot-scope="scope">
+         {{scope.row.hook_name}}
+       </template>
      </el-table-column>
      <el-table-column
        prop="request"
